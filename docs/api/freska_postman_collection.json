@@ -1,0 +1,290 @@
+{
+  "info": {
+    "name": "Freska Delivery Partner API",
+    "description": "Production Postman Collection for Freska Delivery Partner Platform (Backend & Admin)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth & Onboarding",
+      "item": [
+        {
+          "name": "Send OTP",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"+919876543210\"\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/auth/otp/send", "host": ["{{baseUrl}}"], "path": ["auth", "otp", "send"]}
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"+919876543210\",\n  \"otp\": \"123456\"\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/auth/otp/verify", "host": ["{{baseUrl}}"], "path": ["auth", "otp", "verify"]}
+          }
+        },
+        {
+          "name": "Update Bank Details",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bank_account_holder\": \"Arjun Sharma\",\n  \"bank_name\": \"HDFC Bank\",\n  \"bank_account_number\": \"50100234918231\",\n  \"bank_ifsc_code\": \"HDFC0001234\",\n  \"bank_upi_id\": \"arjun@okhdfcbank\"\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/bank-details", "host": ["{{baseUrl}}"], "path": ["rider", "bank-details"]}
+          }
+        },
+        {
+          "name": "Update Emergency Contact",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emergency_contact_name\": \"Sunita Sharma\",\n  \"emergency_contact_phone\": \"+919811223344\",\n  \"emergency_contact_relation\": \"Mother\"\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/emergency-contact", "host": ["{{baseUrl}}"], "path": ["rider", "emergency-contact"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Duty & Location",
+      "item": [
+        {
+          "name": "Toggle Duty (Online/Offline)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_online\": true,\n  \"latitude\": 12.971598,\n  \"longitude\": 77.594562\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/duty/toggle", "host": ["{{baseUrl}}"], "path": ["rider", "duty", "toggle"]}
+          }
+        },
+        {
+          "name": "Update Location Coordinates",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 12.972100,\n  \"longitude\": 77.595100,\n  \"heading\": 90,\n  \"speed\": 25\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/location", "host": ["{{baseUrl}}"], "path": ["rider", "location"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Operations",
+      "item": [
+        {
+          "name": "Get Active Order",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/rider/orders/active", "host": ["{{baseUrl}}"], "path": ["rider", "orders", "active"]}
+          }
+        },
+        {
+          "name": "Accept Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 12.935000,\n  \"longitude\": 77.624000\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/orders/1/accept", "host": ["{{baseUrl}}"], "path": ["rider", "orders", "1", "accept"]}
+          }
+        },
+        {
+          "name": "Reject Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Shift ended\"\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/orders/1/reject", "host": ["{{baseUrl}}"], "path": ["rider", "orders", "1", "reject"]}
+          }
+        },
+        {
+          "name": "Mark Arrived at Vendor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 12.935240,\n  \"longitude\": 77.624460\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/orders/1/arrive-vendor", "host": ["{{baseUrl}}"], "path": ["rider", "orders", "1", "arrive-vendor"]}
+          }
+        },
+        {
+          "name": "Mark Picked Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"package_verified\": true\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/orders/1/pickup", "host": ["{{baseUrl}}"], "path": ["rider", "orders", "1", "pickup"]}
+          }
+        },
+        {
+          "name": "Confirm Delivery",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delivery_otp\": \"1234\",\n  \"cash_collected\": 420.00\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/orders/1/confirm-delivery", "host": ["{{baseUrl}}"], "path": ["rider", "orders", "1", "confirm-delivery"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Financials & Performance",
+      "item": [
+        {
+          "name": "Financial Summary",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/rider/financials/summary", "host": ["{{baseUrl}}"], "path": ["rider", "financials", "summary"]}
+          }
+        },
+        {
+          "name": "COD Orders & Status",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/rider/cod/orders", "host": ["{{baseUrl}}"], "path": ["rider", "cod", "orders"]}
+          }
+        },
+        {
+          "name": "Submit COD Handover",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 1200.00,\n  \"handover_method\": \"hub_deposit\",\n  \"handover_reference\": \"REC-9812\"\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/cod/deposit", "host": ["{{baseUrl}}"], "path": ["rider", "cod", "deposit"]}
+          }
+        },
+        {
+          "name": "Performance Statistics",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/rider/performance", "host": ["{{baseUrl}}"], "path": ["rider", "performance"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Safety & Support",
+      "item": [
+        {
+          "name": "Trigger SOS",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 12.935000,\n  \"longitude\": 77.624000,\n  \"location_address\": \"Koramangala 4th block\"\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/safety/sos", "host": ["{{baseUrl}}"], "path": ["rider", "safety", "sos"]}
+          }
+        },
+        {
+          "name": "Get Insurance Information",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/rider/safety/insurance", "host": ["{{baseUrl}}"], "path": ["rider", "safety", "insurance"]}
+          }
+        },
+        {
+          "name": "Create Support Ticket",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"customer_issue\",\n  \"subject\": \"Customer not picking up phone\",\n  \"description\": \"Waited at location for 10 minutes\"\n}"
+            },
+            "url": {"raw": "{{baseUrl}}/rider/support/tickets", "host": ["{{baseUrl}}"], "path": ["rider", "support", "tickets"]}
+          }
+        }
+      ]
+    }
+  ]
+}

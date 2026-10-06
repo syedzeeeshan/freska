@@ -1,0 +1,70 @@
+name: freska_rider
+description: "Freska Delivery Partner Mobile Application — Google Stitch Design"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  flutter_bloc: ^8.1.6
+  hydrated_bloc: ^9.1.5
+  equatable: ^2.0.5
+
+  # Dependency Injection & Routing
+  get_it: ^7.7.0
+  go_router: ^14.2.0
+
+  # Networking & Serialization
+  dio: ^5.7.0
+  json_annotation: ^4.9.0
+
+  # Storage
+  flutter_secure_storage: ^9.2.2
+  hive_flutter: ^1.1.0
+
+  # Hardware & Geolocation
+  geolocator: ^13.0.1
+  google_maps_flutter: ^2.9.0
+
+  # Notifications & Media
+  firebase_core: ^3.4.0
+  firebase_messaging: ^15.1.3
+  audioplayers: ^6.1.0
+  flutter_tts: ^4.2.2
+  vibration: ^3.2.1
+
+  # System & Intent Integration
+  url_launcher: ^6.3.0
+
+  # UI Enhancements & Google Stitch Components
+  pin_code_fields: ^8.0.1
+  signature: ^5.5.0
+  image_picker: ^1.1.2
+  fl_chart: ^0.69.0
+  wolt_modal_sheet: ^0.6.0
+  intl: ^0.19.0
+
+  path_provider: any
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  bloc_test: ^9.1.7
+  mocktail: ^1.0.4
+  build_runner: ^2.4.11
+  json_serializable: ^6.8.0
+
+dependency_overrides:
+  path_provider_foundation: 2.4.0
+  flutter_keyboard_visibility: ^7.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/sounds/
+    - assets/icons/

@@ -1,0 +1,9 @@
+# Storage directory
+/framework/cache/*
+/framework/sessions/*
+/framework/views/*
+/logs/*
+!/framework/cache/.gitkeep
+!/framework/sessions/.gitkeep
+!/framework/views/.gitkeep
+!/logs/.gitkeep
